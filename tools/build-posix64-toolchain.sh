@@ -19,10 +19,10 @@ which getconf >/dev/null 2>/dev/null && {
 
 numproc=`getnumproc`
 
-BINUTILS="ftp://ftp.gnu.org/gnu/binutils/binutils-2.34.tar.bz2"
-GCC="ftp://ftp.gnu.org/gnu/gcc/gcc-10.1.0/gcc-10.1.0.tar.gz"
+BINUTILS="ftp://ftp.gnu.org/gnu/binutils/binutils-2.37.tar.bz2"
+GCC="ftp://ftp.gnu.org/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.gz"
 MAKE="ftp://ftp.gnu.org/gnu/make/make-4.2.1.tar.bz2"
-NEWLIB="ftp://sourceware.org/pub/newlib/newlib-3.3.0.tar.gz"
+NEWLIB="ftp://sourceware.org/pub/newlib/newlib-4.1.0.tar.gz"
 TCFLAG="-g -O2 -D_MIPS_SZLONG=32 -D_MIPS_SZINT=32 -mabi=32 -march=vr4300 -mtune=vr4300 -mfix4300"
 TCXXFLAG="-g -O2 -D_MIPS_SZLONG=32 -D_MIPS_SZINT=32 -mabi=32 -march=vr4300 -mtune=vr4300 -mfix4300"
 
@@ -246,6 +246,24 @@ if [ ! -f stamps/mkfs-build ]; then
   cc -Wall -Wextra -pedantic -std=c99 -O2 mkfs.c -o bin/mkfs
 
   touch stamps/mkfs-build
+fi
+
+if [ ! -f stamps/chksum64-build ]; then
+  cc -Wall -Wextra -pedantic -std=gnu99 -O2 chksum64.c -o bin/chksum64
+
+  touch stamps/chksum64-build
+fi
+
+if [ ! -f stamps/n64tool-build ]; then
+  cc -Wall -Wextra -pedantic -std=gnu99 -O2 n64tool.c -o bin/n64tool
+
+  touch stamps/n64tool-build
+fi
+
+if [ ! -f stamps/mkgraphics-build ]; then
+  cc -Wall -Wextra -pedantic -std=gnu99 -O2 mkgraphics.c -o bin/mkgraphics -lpng
+
+  touch stamps/mkgraphics-build
 fi
 
 if [ ! -f stamps/rspasm-build ]; then
